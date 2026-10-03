@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e6d284e84d0a1441ae6beb2d43f25f4, type: 3}
-  m_Name: Masilla
+  m_Name: Healer
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   <Name>k__BackingField: asdqA
   <Size>k__BackingField: {x: 1, y: 1}
-  <Prefab>k__BackingField: {fileID: 3020539032648193528, guid: 131c957da081a824688153f64455f0cf, type: 3}
+  <Prefab>k__BackingField: {fileID: 8084410621290317410, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
+  MaxHealth: 0
+  damage: 0
