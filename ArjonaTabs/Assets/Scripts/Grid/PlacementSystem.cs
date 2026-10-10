@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -9,11 +10,11 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Grid grid;
 
     [SerializeField] private GameObject gridVisualization;
+    
+    private TeamMember.Team selectedTeam;
 
     private EnemyStats selectedEnemy;
-
     private GridData enemyData;
-    
 
     private void Start()
     {
@@ -27,7 +28,6 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
 
         selectedEnemy = enemy;
-       
 
         if (selectedEnemy == null)
         {
@@ -78,37 +78,10 @@ public class PlacementSystem : MonoBehaviour
             selectedEnemy.Size
         );
     }
-    public void StartRemoval()
-    {
-        StopPlacement();
-
-        isRemoving = true;
-
-        gridVisualization.SetActive(true);
-
-        inputManager.OnClick += RemoveEnemy;
-        inputManager.OnExit += StopPlacement;
-    }
-    private void RemoveEnemy()
-    {
-        if (inputManager.IsPointerOverUIObject())
-        {
-            return;
-        }
-
-        Vector3 mousePosition =
-            inputManager.GetSelectedMapPosition();
-
-        Vector3Int gridPosition =
-            grid.WorldToCell(mousePosition);
-
-        enemyData.RemoveObjectAt(gridPosition);
-    }
 
     private void StopPlacement()
     {
         selectedEnemy = null;
-        isRemoving = false;
 
         if (gridVisualization != null)
         {
@@ -116,7 +89,6 @@ public class PlacementSystem : MonoBehaviour
         }
 
         inputManager.OnClick -= PlaceEnemy;
-        inputManager.OnClick -= RemoveEnemy;
         inputManager.OnExit -= StopPlacement;
     }
 
