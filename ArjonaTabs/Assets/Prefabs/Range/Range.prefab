@@ -81,7 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c74d177ed046f44885c1e5a11f43b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyControler
-  stats: {fileID: 11400000, guid: 1f091601adaaa7243a3a3cbd8a0156d9, type: 2}
+  stats: {fileID: 5334592445811516905}
+  teamMember: {fileID: 0}
 --- !u!1 &8733881151506431015
 GameObject:
   m_ObjectHideFlags: 0

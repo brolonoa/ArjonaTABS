@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
-public class EnemyControler : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
-   [SerializeField] public EnemyStats stats;
+   [SerializeField] public UnitStats stats;
    private EnemyMovement _enemyMovement;
+   public TeamMember teamMember;
 
    private void OnEnable()
    {

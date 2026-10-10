@@ -3,22 +3,64 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyStats", menuName = "Scriptable Objects/EnemyStats")]
 public class EnemyStats : ScriptableObject
 {
-    [field: SerializeField]
-    public string Name { get; private set; }
-
-    [field: SerializeField]
     public Vector2Int Size { get; private set; } = Vector2Int.one;
-
-    [field: SerializeField]
     public GameObject BluePrefab { get; private set; }
-
-    [field: SerializeField]
     public GameObject RedPrefab { get; private set; }
     
-    [Header("Stats")]
-    [SerializeField] public int MaxHealth;
+    [Header("Row name in Google Sheets (soldier, tank, ranged, healer)")]
+    [SerializeField] private string unitType;
 
-    [SerializeField] public float damage;
-    
+    [Header("Unit Parameters from Google Sheets")]
+    public int health;
+    public int damage;
+    public float speed;
+    public float attackCooldown;
+    public float range;
+    public int costCurrency;
+
+    public bool IsHealer => damage < 0;
+
+    private void Start()
+    {
+        if (ExcelManager.Instance == null)
+        {
+            return;
+        }
+
+        if (ExcelManager.Instance.IsLoaded)
+        {
+            ApplyStats();
+        }
+        else
+        {
+            ExcelManager.Instance.OnDataLoaded += ApplyStats;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (ExcelManager.Instance != null)
+        {
+            ExcelManager.Instance.OnDataLoaded -= ApplyStats;
+        }
+    }
+
+    private void ApplyStats()
+    {
+        ExcelManager.Instance.OnDataLoaded -= ApplyStats;
+
+        if (!ExcelManager.Instance.TryGetUnitData(unitType, out ExcelManager.UnitData data))
+        {
+            Debug.LogWarning($"{name}: no hay datos para '{unitType}' en el Excel.");
+            return;
+        }
+
+        health = data.health;
+        damage = data.damage;
+        speed = data.speed;
+        attackCooldown = data.attackCooldown;
+        range = data.range;
+        costCurrency = data.costCurrency;
+    }
 
 }

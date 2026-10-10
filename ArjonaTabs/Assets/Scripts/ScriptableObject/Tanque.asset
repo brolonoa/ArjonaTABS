@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6d284e84d0a1441ae6beb2d43f25f4, type: 3}
   m_Name: Tanque
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  <Name>k__BackingField: asdqA
-  <Size>k__BackingField: {x: 1, y: 1}
-  <Prefab>k__BackingField: {fileID: 7460272611681033956, guid: 889b08d17ccacc74d84b53cf5ba3b260, type: 3}
-  MaxHealth: 0
+  unitType: 
+  health: 0
   damage: 0
+  speed: 0
+  attackCooldown: 0
+  range: 0
+  costCurrency: 0

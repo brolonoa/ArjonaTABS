@@ -81,7 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c74d177ed046f44885c1e5a11f43b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyControler
-  stats: {fileID: 11400000, guid: 1f091601adaaa7243a3a3cbd8a0156d9, type: 2}
+  stats: {fileID: 8278503731793883331}
+  teamMember: {fileID: 4446175294916261194}
 --- !u!1 &7460272611681033956
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 409587102214434279}
   - component: {fileID: 8278503731793883331}
+  - component: {fileID: 4446175294916261194}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -134,6 +136,20 @@ MonoBehaviour:
   attackCooldown: 0
   range: 0
   costCurrency: 0
+--- !u!114 &4446175294916261194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460272611681033956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3d251bb230a4247a5a7783acac55e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamMember
+  movementTransform: {fileID: 934851270086968392}
+  team: 0
 --- !u!1001 &8629722530628391841
 PrefabInstance:
   m_ObjectHideFlags: 0

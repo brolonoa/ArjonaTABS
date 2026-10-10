@@ -8,10 +8,11 @@ public class PlacementSystem : MonoBehaviour
 
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Grid grid;
+    [SerializeField] private TeamGrid teamGrid;
 
     [SerializeField] private GameObject gridVisualization;
 
-    private EnemyStats selectedEnemy;
+    private GameObject selectedEnemyPrefab;
     private GridData enemyData;
 
     private void Start()
@@ -21,13 +22,13 @@ public class PlacementSystem : MonoBehaviour
         enemyData = new GridData();
     }
 
-    public void StartPlacement(EnemyStats enemy)
+    public void StartPlacement(GameObject prefab)
     {
         StopPlacement();
 
-        selectedEnemy = enemy;
+        selectedEnemyPrefab = prefab;
 
-        if (selectedEnemy == null)
+        if (selectedEnemyPrefab == null)
         {
             return;
         }
@@ -50,78 +51,42 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        TeamGrid teamGrid = hitObject.GetComponentInParent<TeamGrid>();
+        TeamGrid clickedTeamGrid = hitObject.GetComponentInParent<TeamGrid>();
 
-        if (teamGrid == null)
+        if (clickedTeamGrid != teamGrid)
         {
             return;
         }
 
-        if (teamGrid.gameObject != grid.gameObject)
-        {
-            return;
-        }
-
-        Vector3 mousePosition =
-            inputManager.GetSelectedMapPosition();
-
-        Vector3Int gridPosition =
-            grid.WorldToCell(mousePosition);
+        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
+        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
         if (!CheckPlacementValidity(gridPosition))
         {
             return;
         }
 
-        GameObject prefabToPlace;
+        GameObject newObject = Instantiate(selectedEnemyPrefab);
+        newObject.transform.position = grid.CellToWorld(gridPosition);
 
-        if (teamGrid.Team == TeamMember.Team.Blue)
+        TeamMember teamMember = newObject.GetComponent<TeamMember>();
+
+        if (teamMember != null)
         {
-            prefabToPlace = selectedEnemy.BluePrefab;
-        }
-        else
-        {
-            prefabToPlace = selectedEnemy.RedPrefab;
-        }
-
-        GameObject newObject = Instantiate(prefabToPlace);
-
-        TeamMember teamMember =
-            newObject.GetComponent<TeamMember>();
-
-        if (teamMember == null)
-        {
-            Debug.LogError(
-                $"El prefab {newObject.name} no tiene TeamMember."
-            );
-
-            Destroy(newObject);
-            return;
+            teamMember.SetTeam(teamGrid.Team);
         }
 
-        teamMember.SetTeam(teamGrid.Team);
-
-        newObject.transform.position =
-            grid.CellToWorld(gridPosition);
-
-        enemyData.AddObjectAt(
-            gridPosition,
-            selectedEnemy.Size,
-            newObject
-        );
+        enemyData.AddObjectAt(gridPosition, Vector2Int.one, newObject);
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition)
     {
-        return enemyData.CanPlaceObjectAt(
-            gridPosition,
-            selectedEnemy.Size
-        );
+        return enemyData.CanPlaceObjectAt(gridPosition, Vector2Int.one);
     }
 
     private void StopPlacement()
     {
-        selectedEnemy = null;
+        selectedEnemyPrefab = null;
 
         if (gridVisualization != null)
         {
@@ -137,22 +102,18 @@ public class PlacementSystem : MonoBehaviour
 
     private void Update()
     {
-        if (selectedEnemy == null)
+        if (selectedEnemyPrefab == null)
         {
             return;
         }
 
-        Vector3 mousePosition =
-            inputManager.GetSelectedMapPosition();
+        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
+        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        Vector3Int gridPosition =
-            grid.WorldToCell(mousePosition);
-
-        mouseIndicator.transform.position =
-            mousePosition;
-
-        cellIndicator.transform.position =
-            grid.CellToWorld(gridPosition);
+        mouseIndicator.transform.position = mousePosition;
+        cellIndicator.transform.position = grid.CellToWorld(gridPosition);
     }
+
+   
 }
 
