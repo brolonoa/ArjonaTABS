@@ -13,7 +13,7 @@ public class PlacementSystem : MonoBehaviour
     private EnemyStats selectedEnemy;
 
     private GridData enemyData;
-    private bool isRemoving;
+    
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
 
         selectedEnemy = enemy;
-        isRemoving = false;
+       
 
         if (selectedEnemy == null)
         {

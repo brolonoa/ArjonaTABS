@@ -22,4 +22,8 @@ public class GameManager : MonoBehaviour
       OnCombatStart?.Invoke();
    }
 
+   private void RemoveAll()
+   {
+      
+   }
 }
