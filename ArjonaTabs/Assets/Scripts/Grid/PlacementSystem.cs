@@ -10,8 +10,6 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Grid grid;
 
     [SerializeField] private GameObject gridVisualization;
-    
-    private TeamMember.Team selectedTeam;
 
     private EnemyStats selectedEnemy;
     private GridData enemyData;
@@ -47,6 +45,23 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
+        if (!inputManager.TryGetClickedObject(out GameObject hitObject))
+        {
+            return;
+        }
+
+        TeamGrid teamGrid = hitObject.GetComponentInParent<TeamGrid>();
+
+        if (teamGrid == null)
+        {
+            return;
+        }
+
+        if (teamGrid.gameObject != grid.gameObject)
+        {
+            return;
+        }
+
         Vector3 mousePosition =
             inputManager.GetSelectedMapPosition();
 
@@ -58,8 +73,33 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        GameObject newObject =
-            Instantiate(selectedEnemy.Prefab);
+        GameObject prefabToPlace;
+
+        if (teamGrid.Team == TeamMember.Team.Blue)
+        {
+            prefabToPlace = selectedEnemy.BluePrefab;
+        }
+        else
+        {
+            prefabToPlace = selectedEnemy.RedPrefab;
+        }
+
+        GameObject newObject = Instantiate(prefabToPlace);
+
+        TeamMember teamMember =
+            newObject.GetComponent<TeamMember>();
+
+        if (teamMember == null)
+        {
+            Debug.LogError(
+                $"El prefab {newObject.name} no tiene TeamMember."
+            );
+
+            Destroy(newObject);
+            return;
+        }
+
+        teamMember.SetTeam(teamGrid.Team);
 
         newObject.transform.position =
             grid.CellToWorld(gridPosition);
@@ -88,8 +128,11 @@ public class PlacementSystem : MonoBehaviour
             gridVisualization.SetActive(false);
         }
 
-        inputManager.OnClick -= PlaceEnemy;
-        inputManager.OnExit -= StopPlacement;
+        if (inputManager != null)
+        {
+            inputManager.OnClick -= PlaceEnemy;
+            inputManager.OnExit -= StopPlacement;
+        }
     }
 
     private void Update()
@@ -112,3 +155,4 @@ public class PlacementSystem : MonoBehaviour
             grid.CellToWorld(gridPosition);
     }
 }
+

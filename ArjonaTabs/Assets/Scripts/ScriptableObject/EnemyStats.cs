@@ -10,7 +10,10 @@ public class EnemyStats : ScriptableObject
     public Vector2Int Size { get; private set; } = Vector2Int.one;
 
     [field: SerializeField]
-    public GameObject Prefab { get; private set; }
+    public GameObject BluePrefab { get; private set; }
+
+    [field: SerializeField]
+    public GameObject RedPrefab { get; private set; }
     
     [Header("Stats")]
     [SerializeField] public int MaxHealth;

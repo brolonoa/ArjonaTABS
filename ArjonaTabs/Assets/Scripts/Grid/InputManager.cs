@@ -51,4 +51,17 @@ public class InputManager : MonoBehaviour
 
         return lastPosition;
     }
+    public bool TryGetClickedObject(out GameObject hitObject)
+    {
+        Ray ray = sceneCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, placementLayerMask))
+        {
+            hitObject = hit.collider.gameObject;
+            return true;
+        }
+
+        hitObject = null;
+        return false;
+    }
 }

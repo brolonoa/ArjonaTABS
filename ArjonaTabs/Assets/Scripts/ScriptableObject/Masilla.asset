@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   <Name>k__BackingField: asdqA
   <Size>k__BackingField: {x: 1, y: 1}
-  <Prefab>k__BackingField: {fileID: 3020539032648193528, guid: 131c957da081a824688153f64455f0cf, type: 3}
+  <BluePrefab>k__BackingField: {fileID: 7184383677047233803, guid: 3f94e2ae156bed14895af6879afcb5c9, type: 3}
+  <RedPrefab>k__BackingField: {fileID: 201254858787114251, guid: e611ad549a1de094b8ae5bd80a54b31c, type: 3}
+  MaxHealth: 0
+  damage: 0

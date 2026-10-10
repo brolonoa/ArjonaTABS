@@ -772,9 +772,8 @@ MonoBehaviour:
   mouseIndicator: {fileID: 1072571517}
   cellIndicator: {fileID: 613944189}
   inputManager: {fileID: 1070472838}
-  grid: {fileID: 1161524608}
+  grid: {fileID: 450690930}
   gridVisualization: {fileID: 450690924}
-  team: 0
 --- !u!4 &366899676
 Transform:
   m_ObjectHideFlags: 0
@@ -1031,6 +1030,8 @@ GameObject:
   - component: {fileID: 450690928}
   - component: {fileID: 450690927}
   - component: {fileID: 450690926}
+  - component: {fileID: 450690929}
+  - component: {fileID: 450690930}
   m_Layer: 6
   m_Name: GridVisualizationRed
   m_TagString: Untagged
@@ -1048,7 +1049,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 927283428}
@@ -1131,6 +1132,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450690924}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &450690929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450690924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c1aed5cadb06c4b88a0fb3c4116916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamGrid
+  team: 1
+--- !u!156049354 &450690930
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450690924}
+  m_Enabled: 1
+  m_CellSize: {x: 1, y: 1, z: 1}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
 --- !u!1 &454392701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,9 +1204,8 @@ MonoBehaviour:
   mouseIndicator: {fileID: 1072571517}
   cellIndicator: {fileID: 613944189}
   inputManager: {fileID: 1070472838}
-  grid: {fileID: 574126996}
+  grid: {fileID: 914786240}
   gridVisualization: {fileID: 914786234}
-  team: 0
 --- !u!1 &460355156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,7 +1568,7 @@ Transform:
   m_GameObject: {fileID: 523222488}
   serializedVersion: 2
   m_LocalRotation: {x: 0.36341742, y: -0.6065705, z: 0.36341754, w: 0.60657054}
-  m_LocalPosition: {x: -4.15, y: 14.44, z: 3.96}
+  m_LocalPosition: {x: -6, y: 10.99, z: 25.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1774,50 +1799,6 @@ MonoBehaviour:
   enemyStats: {fileID: 11400000, guid: 1f091601adaaa7243a3a3cbd8a0156d9, type: 2}
   placementSystemBlue: {fileID: 454392703}
   placementSystemRed: {fileID: 366899675}
---- !u!1 &574126994
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 574126995}
-  - component: {fileID: 574126996}
-  m_Layer: 0
-  m_Name: GridBlue
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &574126995
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574126994}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 739328540}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!156049354 &574126996
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574126994}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
 --- !u!1 &613944189 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3553543489968133500, guid: ae997d92e43a3634599346778e3098be, type: 3}
@@ -2092,7 +2073,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 574126995}
   - {fileID: 914786238}
   - {fileID: 378570758}
   m_Father: {fileID: 0}
@@ -2301,6 +2281,8 @@ GameObject:
   - component: {fileID: 914786237}
   - component: {fileID: 914786236}
   - component: {fileID: 914786235}
+  - component: {fileID: 914786239}
+  - component: {fileID: 914786240}
   m_Layer: 6
   m_Name: GridVisualizationBlue
   m_TagString: Untagged
@@ -2396,11 +2378,36 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 739328540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &914786239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914786234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c1aed5cadb06c4b88a0fb3c4116916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamGrid
+  team: 0
+--- !u!156049354 &914786240
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914786234}
+  m_Enabled: 1
+  m_CellSize: {x: 1, y: 1, z: 1}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
 --- !u!1 &927283427
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,7 +2437,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1161524607}
   - {fileID: 450690925}
   - {fileID: 1242594707}
   m_Father: {fileID: 0}
@@ -3143,50 +3149,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &1161524606
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1161524607}
-  - component: {fileID: 1161524608}
-  m_Layer: 0
-  m_Name: GridRed
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1161524607
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161524606}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 927283428}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!156049354 &1161524608
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161524606}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
 --- !u!4 &1233331696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5381386135662447605, guid: 21a364ddeffc797439f2a5721660b0e6, type: 3}
@@ -4166,7 +4128,7 @@ Transform:
   m_GameObject: {fileID: 1593855780}
   serializedVersion: 2
   m_LocalRotation: {x: 0.36341742, y: -0.6065705, z: 0.36341754, w: 0.60657054}
-  m_LocalPosition: {x: -4.15, y: 14.44, z: 3.96}
+  m_LocalPosition: {x: -6, y: 10.99, z: 25.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
