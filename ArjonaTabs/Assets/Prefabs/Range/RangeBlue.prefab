@@ -9,9 +9,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1157823048111207230, guid: 03867604c2d1f6f4d87f1eda24e9a384, type: 3}
-      propertyPath: teamMember
+      propertyPath: anim
       value: 
-      objectReference: {fileID: 2138258954493869855}
+      objectReference: {fileID: 1684195510421966566}
     - target: {fileID: 4768831625415422903, guid: 03867604c2d1f6f4d87f1eda24e9a384, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -63,32 +63,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8733881151506431015, guid: 03867604c2d1f6f4d87f1eda24e9a384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2138258954493869855}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03867604c2d1f6f4d87f1eda24e9a384, type: 3}
---- !u!4 &4142292745012649609 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1127862965033678444, guid: 03867604c2d1f6f4d87f1eda24e9a384, type: 3}
+--- !u!95 &1684195510421966566 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2415599346487453187, guid: 03867604c2d1f6f4d87f1eda24e9a384, type: 3}
   m_PrefabInstance: {fileID: 3952638929597802725}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5759649309809939650 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8733881151506431015, guid: 03867604c2d1f6f4d87f1eda24e9a384, type: 3}
-  m_PrefabInstance: {fileID: 3952638929597802725}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2138258954493869855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5759649309809939650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee3d251bb230a4247a5a7783acac55e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TeamMember
-  movementTransform: {fileID: 4142292745012649609}
-  team: 0

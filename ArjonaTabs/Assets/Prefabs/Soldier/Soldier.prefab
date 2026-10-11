@@ -79,6 +79,9 @@ GameObject:
   - component: {fileID: 3356758190293481258}
   - component: {fileID: 8947955891528112659}
   - component: {fileID: 2214675475949999430}
+  - component: {fileID: 6042095176292357817}
+  - component: {fileID: 4366922163204277379}
+  - component: {fileID: 4428604914199759958}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -136,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6151f66a92ede0647a1dd8a500eea078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  rotationSpeed: 360
 --- !u!114 &2214675475949999430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +154,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyControler
   stats: {fileID: 6741619787656146097}
   teamMember: {fileID: 306193634184249372}
+  anim: {fileID: 2991438733609458404}
+--- !u!114 &6042095176292357817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102933344042142264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef1b1ec036b52f43adfdaf2c0addf97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttack
+  boxSize: {x: 1.34, y: 3, z: 2}
+--- !u!114 &4366922163204277379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102933344042142264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5f8449189334647a5ddcabb12b2544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHp
+  currentHealth: 0
+--- !u!136 &4428604914199759958
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102933344042142264}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.4438534
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7219267, z: 0}
 --- !u!1001 &8712543350754010997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,8 +267,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c18218feab30a94397c5230415876c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6713948247564339795}
   m_SourcePrefab: {fileID: 100100000, guid: 0c18218feab30a94397c5230415876c3, type: 3}
+--- !u!95 &2991438733609458404 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0c18218feab30a94397c5230415876c3, type: 3}
+  m_PrefabInstance: {fileID: 8712543350754010997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8370016692154096164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c18218feab30a94397c5230415876c3, type: 3}
+  m_PrefabInstance: {fileID: 8712543350754010997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6713948247564339795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8370016692154096164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c8439b660b6c74e890376f4e078256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimEvents
+  _meleeAttack: {fileID: 6042095176292357817}
 --- !u!4 &9179344813665747102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0c18218feab30a94397c5230415876c3, type: 3}

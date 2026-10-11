@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +24,8 @@ public class GameManager : MonoBehaviour
       OnCombatStart?.Invoke();
    }
 
-   private void RemoveAll()
+   public void RemoveAll()
    {
-      
+      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
    }
 }

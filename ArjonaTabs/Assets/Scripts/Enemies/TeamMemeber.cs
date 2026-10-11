@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class TeamMember : MonoBehaviour
 {
     [SerializeField] private Transform movementTransform;
-
+    private EnemyHp hp;
     public Vector3 Position => movementTransform.position;
     public enum Team
     {
@@ -15,6 +16,11 @@ public class TeamMember : MonoBehaviour
 
     public Team CurrentTeam => team;
 
+    private void Start()
+    {
+        hp = GetComponentInChildren<EnemyHp>();
+    }
+
     public void SetTeam(Team newTeam)
     {
         team = newTeam;
@@ -23,6 +29,12 @@ public class TeamMember : MonoBehaviour
     public bool IsEnemy(TeamMember other)
     {
         return other != null && other.CurrentTeam != team;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        hp.TakeDamage(damage);
+        Debug.Log(damage);
     }
 
     private void OnEnable()

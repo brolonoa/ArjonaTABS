@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
    private TeamMember currentTarget;
    
    private bool combatStarted = false;
+   [SerializeField] private float rotationSpeed = 360f;
 
    private void Start()
    {
@@ -28,10 +29,8 @@ public class EnemyMovement : MonoBehaviour
    private void SearchNextTarget()
    {
       currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
-      if (currentTarget != null)
-      {
-         Debug.Log($"Objetivo: {currentTarget.name}, posición: {currentTarget.transform.position}");
-      }
+      sm.currentTarget = currentTarget;
+      
    }
    private void InicialiceStats()
    {
@@ -47,14 +46,12 @@ public class EnemyMovement : MonoBehaviour
          return;
       }
       _agent.SetDestination(currentTarget.Position);
-      if (IsInAttackRange())
-      {
-         Destroy(gameObject);
-      } 
+      
+      LookAtTarget();
      
    }
 
-   private bool IsInAttackRange()
+   public bool IsInAttackRange()
    {
       if (currentTarget == null)
       {
@@ -64,6 +61,29 @@ public class EnemyMovement : MonoBehaviour
       float distance = (currentTarget.Position - transform.position).sqrMagnitude;
 
       return distance <= sm.stats.range * sm.stats.range;
+   }
+   
+   private void LookAtTarget()
+   {
+      Vector3 direction = currentTarget.Position - transform.position;
+      direction.y = 0f;
+
+      if (direction == Vector3.zero)
+         return;
+
+      Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+      transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+   }
+
+   public void StopAgent()
+   {
+      _agent.isStopped = true;
+   }
+
+   public void ResumeAgent()
+   {
+      _agent.isStopped = false;
    }
   
 }
