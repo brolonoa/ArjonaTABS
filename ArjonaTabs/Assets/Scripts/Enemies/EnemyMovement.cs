@@ -28,8 +28,17 @@ public class EnemyMovement : MonoBehaviour
 
    private void SearchNextTarget()
    {
-      currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
-      sm.currentTarget = currentTarget;
+      if (sm.stats.name == "healer")
+      {
+         currentTarget = BattleManager.Instance.FindClosestAlly(sm.teamMember);
+         sm.currentTarget = currentTarget;
+      }
+      else
+      {
+         currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
+         sm.currentTarget = currentTarget;
+      }
+      
       
    }
    private void InicialiceStats()

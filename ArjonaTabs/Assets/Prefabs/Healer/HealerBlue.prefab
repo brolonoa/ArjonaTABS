@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1115960169195538461, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
+      propertyPath: teamMember
+      value: 
+      objectReference: {fileID: 6476949297068002053}
+    - target: {fileID: 1115960169195538461, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
+      propertyPath: currentTarget
+      value: 
+      objectReference: {fileID: 6476949297068002053}
     - target: {fileID: 3213534982331945343, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -65,6 +73,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6476949297068002053}
   m_SourcePrefab: {fileID: 100100000, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
+--- !u!4 &799437050869122345 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1334301666090244145, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
+  m_PrefabInstance: {fileID: 1845437395597679896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7614979112418270074 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8084410621290317410, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
@@ -82,4 +95,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3d251bb230a4247a5a7783acac55e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeamMember
+  movementTransform: {fileID: 799437050869122345}
   team: 0

@@ -25,9 +25,9 @@ public class BattleManager : MonoBehaviour
         units.Remove(unit);
     }
 
-    public TeamMember FindClosestEnemy(TeamMember unit)
+    public TeamMember FindClosest(TeamMember unit, bool allies)
     {
-        TeamMember closestEnemy = null;
+        TeamMember closest = null;
         float closestDistance = float.MaxValue;
 
         foreach (TeamMember other in units)
@@ -37,7 +37,11 @@ public class BattleManager : MonoBehaviour
                 continue;
             }
 
-            if (other.CurrentTeam == unit.CurrentTeam)
+                bool sameTeam = other.CurrentTeam == unit.CurrentTeam;
+
+            // allies = true  -> solo aliados
+            // allies = false -> solo enemigos
+            if (sameTeam != allies)
             {
                 continue;
             }
@@ -47,10 +51,13 @@ public class BattleManager : MonoBehaviour
             if (distance < closestDistance)
             {
                 closestDistance = distance;
-                closestEnemy = other;
+                closest = other;
             }
         }
 
-        return closestEnemy;
+        return closest;
     }
+    public TeamMember FindClosestEnemy(TeamMember unit) => FindClosest(unit, false);
+    public TeamMember FindClosestAlly(TeamMember unit) => FindClosest(unit, true);
+
 }
