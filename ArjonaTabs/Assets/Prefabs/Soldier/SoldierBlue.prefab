@@ -12,13 +12,17 @@ PrefabInstance:
       propertyPath: team
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2214675475949999430, guid: 131c957da081a824688153f64455f0cf, type: 3}
+      propertyPath: currentTarget
+      value: 
+      objectReference: {fileID: 5647729024713656559}
     - target: {fileID: 3012231648870168517, guid: 131c957da081a824688153f64455f0cf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f6208d2bd5d402a4bac8382fca198aba, type: 2}
     - target: {fileID: 3020539032648193528, guid: 131c957da081a824688153f64455f0cf, type: 3}
       propertyPath: m_Name
-      value: EnemyMasillaBlue
+      value: SoldierBlue
       objectReference: {fileID: 0}
     - target: {fileID: 3021103521029543296, guid: 131c957da081a824688153f64455f0cf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -73,3 +77,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 131c957da081a824688153f64455f0cf, type: 3}
+--- !u!114 &5647729024713656559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 306193634184249372, guid: 131c957da081a824688153f64455f0cf, type: 3}
+  m_PrefabInstance: {fileID: 5359022821717657843}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3d251bb230a4247a5a7783acac55e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamMember

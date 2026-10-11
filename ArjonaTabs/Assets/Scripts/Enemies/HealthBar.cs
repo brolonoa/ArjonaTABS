@@ -22,14 +22,13 @@ public class HealthBar : MonoBehaviour
    {
       if (maxHealth <= 0)
       {
-         maxHealth = controller != null && controller.stats != null && controller.stats.health > 0
-            ? controller.stats.health
-            : enemyHp.currentHealth;
+         maxHealth = controller != null && controller.stats != null && controller.stats.health > 0 ? controller.stats.health : enemyHp.currentHealth;
       }
 
       float percent = maxHealth > 0 ? Mathf.Clamp01(enemyHp.currentHealth / maxHealth) : 0;
       fill.anchorMax = new Vector2(percent, 1);
-      fillImage.color = Color.Lerp(emptyColor, fullColor, percent);
+      //fillImage.color = Color.Lerp(emptyColor, fullColor, percent);
+     
    }
 
    private void LateUpdate()
