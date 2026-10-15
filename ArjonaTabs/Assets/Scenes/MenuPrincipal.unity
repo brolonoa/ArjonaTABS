@@ -3387,7 +3387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1b59ad2f9eeec45888a6abc5734f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  gameSceneName: Juego
+  gameSceneName: Progra
   optionsPanel: {fileID: 582533778}
 --- !u!114 &1532472268
 MonoBehaviour:
