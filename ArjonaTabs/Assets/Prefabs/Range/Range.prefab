@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6988012793770357345}
   - component: {fileID: 1327476927425623062}
   - component: {fileID: 6677445177823297352}
+  - component: {fileID: 8285634371085733947}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -157,6 +158,26 @@ MonoBehaviour:
   enemyHp: {fileID: 8015280089477780564}
   flashMaterial: {fileID: 2100000, guid: 67cba3ee7e736e243b3f2f5d4bb6e80f, type: 2}
   flashDuration: 0.2
+--- !u!114 &8285634371085733947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880421492345541387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1780b830de080d04f81bf47c5521e4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageNumbers
+  enemyHp: {fileID: 8015280089477780564}
+  height: 2.5807185
+  damageColor: {r: 1, g: 0.25, b: 0.15, a: 1}
+  healColor: {r: 0.35, g: 1, b: 0.35, a: 1}
+  fontSize: 6
+  lifeTime: 0.9
+  riseSpeed: 1.2
+  randomOffset: 0.3
 --- !u!1 &1285274373477292609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,6 +2040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimEvents
   _meleeAttack: {fileID: 0}
   _rangeAttack: {fileID: 6988012793770357345}
+  _heal: {fileID: 0}
 --- !u!95 &2415599346487453187 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8692973110768169981, guid: a8346d639e308b34192c2ca24516714c, type: 3}
