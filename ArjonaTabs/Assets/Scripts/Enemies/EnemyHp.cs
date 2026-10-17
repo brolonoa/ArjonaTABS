@@ -6,6 +6,7 @@ public class EnemyHp : MonoBehaviour
    private EnemyController sm;
    private float maxHealth;
    public float currentHealth;
+   public float HealthPercentage => maxHealth > 0 ? (float)currentHealth / maxHealth : 0f;
 
    private void Start()
    {
@@ -21,5 +22,9 @@ public class EnemyHp : MonoBehaviour
       {
          Destroy(transform.parent.gameObject);
       }
+   }
+   public void Heal(float amount)
+   {
+      currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
    }
 }

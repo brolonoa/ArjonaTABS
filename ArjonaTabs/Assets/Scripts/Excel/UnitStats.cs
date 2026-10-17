@@ -12,8 +12,9 @@ public class UnitStats : MonoBehaviour
     public float attackCooldown;
     public float range;
     public int costCurrency;
+    public float heal;
 
-    public bool IsHealer => damage < 0;
+    public bool IsHealer => damage <= 0;
 
     private void Start()
     {
@@ -56,5 +57,6 @@ public class UnitStats : MonoBehaviour
         attackCooldown = data.attackCooldown;
         range = data.range;
         costCurrency = data.costCurrency;
+        heal = data.heal;
     }
 }

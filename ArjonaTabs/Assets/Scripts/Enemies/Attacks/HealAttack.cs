@@ -9,6 +9,13 @@ public class HealAttack : EnemyAttack
 
     public void Heal()
     {
-        //sm.currentTarget.
+        if (sm.currentTarget == null)
+            return;
+
+        if (!sm.currentTarget.NeedsHealing)
+            return;
+
+        sm.currentTarget.Heal(sm.stats.heal);
     }
+    
 }

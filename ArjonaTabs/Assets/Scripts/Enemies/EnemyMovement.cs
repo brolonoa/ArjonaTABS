@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour
    
    private bool combatStarted = false;
    [SerializeField] private float rotationSpeed = 360f;
+   [SerializeField] private float healerFollowDistance = 7f;
 
    private void Start()
    {
@@ -28,9 +29,14 @@ public class EnemyMovement : MonoBehaviour
 
    private void SearchNextTarget()
    {
-      if (sm.stats.name == "healer")
+      if (sm.stats.IsHealer)
       {
-         currentTarget = BattleManager.Instance.FindClosestAlly(sm.teamMember);
+         
+         currentTarget = BattleManager.Instance.FindMostInjuredAlly(sm.teamMember);
+         if (currentTarget == null)
+         {
+            currentTarget = BattleManager.Instance.FindClosestAllyPrioritizingNonHealers(sm.teamMember);
+         }
          sm.currentTarget = currentTarget;
       }
       else
@@ -49,15 +55,29 @@ public class EnemyMovement : MonoBehaviour
 
    private void Update()
    {
-      
       if (!combatStarted || currentTarget == null)
-      {
          return;
+
+      float distance = (currentTarget.Position - transform.position).sqrMagnitude;
+
+      if (sm.stats.IsHealer)
+      {
+         if (distance <= healerFollowDistance * healerFollowDistance)
+         {
+            _agent.isStopped = true;
+            return;
+         }
+
+         _agent.isStopped = false;
+         _agent.SetDestination(currentTarget.Position);
       }
-      _agent.SetDestination(currentTarget.Position);
-      
+      else
+      {
+         _agent.isStopped = false;
+         _agent.SetDestination(currentTarget.Position);
+      }
+
       LookAtTarget();
-     
    }
 
    public bool IsInAttackRange()

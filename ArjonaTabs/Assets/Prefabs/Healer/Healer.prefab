@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimEvents
   _meleeAttack: {fileID: 0}
   _rangeAttack: {fileID: 0}
-  _heal: {fileID: 0}
+  _heal: {fileID: 7598996626928539933}
 --- !u!95 &8120533131753348659 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 400ff1074cbaaa640ac7bd5f12bb4fcf, type: 3}

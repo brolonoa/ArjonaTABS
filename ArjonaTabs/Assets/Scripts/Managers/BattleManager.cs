@@ -59,5 +59,87 @@ public class BattleManager : MonoBehaviour
     }
     public TeamMember FindClosestEnemy(TeamMember unit) => FindClosest(unit, false);
     public TeamMember FindClosestAlly(TeamMember unit) => FindClosest(unit, true);
+    
+    public TeamMember FindClosestAllyPrioritizingNonHealers(TeamMember unit)
+    {
+        TeamMember closest = null;
+        float closestDistance = float.MaxValue;
+
+        // Primera búsqueda: aliados que no sean healers.
+        foreach (TeamMember other in units)
+        {
+            if (other == null || other == unit)
+                continue;
+
+            if (other.CurrentTeam != unit.CurrentTeam)
+                continue;
+
+            if (other.IsHealer())
+                continue;
+
+            float distance = (other.Position - unit.Position).sqrMagnitude;
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = other;
+            }
+        }
+
+       
+        if (closest == null)
+        {
+            foreach (TeamMember other in units)
+            {
+                if (other == null || other == unit)
+                    continue;
+
+                if (other.CurrentTeam != unit.CurrentTeam)
+                    continue;
+
+                float distance = (other.Position - unit.Position).sqrMagnitude;
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closest = other;
+                }
+            }
+        }
+
+        return closest;
+    }
+    
+    public TeamMember FindMostInjuredAlly(TeamMember unit)
+    {
+        TeamMember mostInjured = null;
+        float lowestHealthPercentage = 1f;
+
+        foreach (TeamMember other in units)
+        {
+            if (other == null || other == unit)
+            {
+                continue;
+            }
+
+            if (other.CurrentTeam != unit.CurrentTeam)
+            {
+                continue;
+            }
+
+            if (!other.NeedsHealing)
+            {
+                continue;
+            }
+
+            if (other.HealthPercentage < lowestHealthPercentage)
+            {
+                lowestHealthPercentage = other.HealthPercentage;
+                mostInjured = other;
+            }
+        }
+
+        return mostInjured;
+    }
 
 }

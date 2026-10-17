@@ -24,6 +24,7 @@ public class ExcelManager : MonoBehaviour
         public float attackCooldown;
         public float range;
         public int costCurrency;
+        public float heal;
     }
 
     private void Awake()
@@ -102,9 +103,10 @@ public class ExcelManager : MonoBehaviour
                 float.TryParse(fields[4].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out data.attackCooldown);
                 float.TryParse(fields[5].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out data.range);
                 int.TryParse(fields[6].Trim(), out data.costCurrency);
+                float.TryParse(fields[7].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out data.heal);
 
                 unitsData[unitName] = data;
-                Debug.Log($"[Success] {unitName} loaded -> Health: {data.health}, Damage: {data.damage}, Speed: {data.speed}, Cooldown: {data.attackCooldown}, Range: {data.range}, Cost: {data.costCurrency}");
+                Debug.Log($"[Success] {unitName} loaded -> Health: {data.health}, Damage: {data.damage}, Speed: {data.speed}, Cooldown: {data.attackCooldown}, Range: {data.range}, Cost: {data.costCurrency}, Heal: {data.heal}");
             }
         }
     }

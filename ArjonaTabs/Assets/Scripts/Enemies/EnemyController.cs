@@ -44,6 +44,8 @@ public class EnemyController : MonoBehaviour
          
          if (_enemyMovement.IsInAttackRange())
          {
+            if (stats.IsHealer && !currentTarget.NeedsHealing)
+               return;
             _attack.StartAttack();
             StartCoroutine(AttackCooldown());
             isAttackReady=false;

@@ -6,6 +6,8 @@ public class TeamMember : MonoBehaviour
     [SerializeField] private Transform movementTransform;
     private EnemyHp hp;
     public Vector3 Position => movementTransform.position;
+    
+    private UnitStats stats;
     public enum Team
     {
         Blue,
@@ -19,6 +21,12 @@ public class TeamMember : MonoBehaviour
     private void Start()
     {
         hp = GetComponentInChildren<EnemyHp>();
+        stats = GetComponent<UnitStats>();
+    }
+
+    public bool IsHealer()
+    {
+        return stats.IsHealer;
     }
 
     public void SetTeam(Team newTeam)
@@ -53,6 +61,16 @@ public class TeamMember : MonoBehaviour
         }
 
     }
+    public void Heal(float amount)
+    {
+        if (hp == null)
+            return;
+
+        hp.Heal(amount);
+    }
+    public float HealthPercentage => hp != null ? hp.HealthPercentage : 1f;
+
+    public bool NeedsHealing => hp != null && hp.HealthPercentage < 1f;
 }
 
     
