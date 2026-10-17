@@ -7,7 +7,7 @@ public class TeamMember : MonoBehaviour
     private EnemyHp hp;
     public Vector3 Position => movementTransform.position;
     
-    private UnitStats stats;
+    public UnitStats stats;
     public enum Team
     {
         Blue,
@@ -18,7 +18,7 @@ public class TeamMember : MonoBehaviour
 
     public Team CurrentTeam => team;
 
-    private void Start()
+    private void Awake()
     {
         hp = GetComponentInChildren<EnemyHp>();
         stats = GetComponent<UnitStats>();

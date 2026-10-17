@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -6,6 +8,8 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance { get; private set; }
 
     private readonly List<TeamMember> units = new();
+    public event Action<int, bool> OnUnitPlaced;
+    private bool isBlue;
 
     private void Awake()
     {
@@ -14,10 +18,23 @@ public class BattleManager : MonoBehaviour
 
     public void RegisterUnit(TeamMember unit)
     {
-        if (!units.Contains(unit))
-        {
-            units.Add(unit);
-        }
+        if (unit == null || units.Contains(unit))
+            return;
+
+        StartCoroutine(RegisterUnitNextFrame(unit));
+    }
+
+    private IEnumerator RegisterUnitNextFrame(TeamMember unit)
+    {
+        yield return null;
+
+        if (unit == null || unit.stats == null)
+            yield break;
+
+        units.Add(unit);
+
+        bool isBlue = unit.CurrentTeam == TeamMember.Team.Blue;
+        OnUnitPlaced?.Invoke(unit.stats.costCurrency, isBlue);
     }
 
     public void UnregisterUnit(TeamMember unit)
