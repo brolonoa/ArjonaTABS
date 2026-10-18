@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d98589b1c97894fa4016f44a1dbc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  enemyHp: {fileID: 3556379269827497672}
-  controller: {fileID: 1115960169195538461}
+  enemyHp: {fileID: 0}
+  controller: {fileID: 0}
   fill: {fileID: 3104258621160811033}
   fillImage: {fileID: 8292079161815737673}
   fullColor: {r: 0.3, g: 0.85, b: 0.25, a: 1}
@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 3233750993341333166}
   - component: {fileID: 4972139000554785239}
   - component: {fileID: 6780144487879704853}
+  - component: {fileID: 8373715244272943341}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -266,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72742a5f19be0054980def8d9e9e1998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  enemyHp: {fileID: 3556379269827497672}
+  enemyHp: {fileID: 0}
   flashMaterial: {fileID: 2100000, guid: 67cba3ee7e736e243b3f2f5d4bb6e80f, type: 2}
   flashDuration: 0.2
 --- !u!136 &6780144487879704853
@@ -292,6 +293,29 @@ CapsuleCollider:
   m_Height: 2.4438534
   m_Direction: 1
   m_Center: {x: 0, y: 0.7219267, z: 0}
+--- !u!136 &8373715244272943341
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5942555024987319028}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6402933460801657232
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,11 +644,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealBeam
   beamMaterial: {fileID: 2100000, guid: 33782fd5883713145ad6cb6c06f74cef, type: 2}
-  beamColor: {r: 0.3, g: 1, b: 0.35, a: 0.9}
+  beamColor: {r: 0.3, g: 1, b: 0.35, a: 0.6313726}
   startWidth: 0.18
   endWidth: 0.08
   duration: 0.4
-  originHeight: 1.3
+  originHeight: 1
   targetHeight: 1
 --- !u!95 &8120533131753348659 stripped
 Animator:
