@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour
    private int activeSource;
    private GameManager subscribedGameManager;
    private Coroutine fadeCoroutine;
+   private bool musicMuted;
 
    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
    private static void CreateInstance()
@@ -41,6 +42,11 @@ public class SoundManager : MonoBehaviour
       {
          Instantiate(prefab).name = "SoundManager";
       }
+   }
+
+   public void ToggleMusic()
+   {
+      musicMuted = !musicMuted;
    }
 
    private void Awake()
@@ -87,7 +93,7 @@ public class SoundManager : MonoBehaviour
    {
       for (int i = 0; i < musicSources.Length; i++)
       {
-         musicSources[i].volume = fades[i] * musicVolume;
+         musicSources[i].volume = musicMuted ? 0 : fades[i] * musicVolume;
       }
    }
 
