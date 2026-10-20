@@ -39,18 +39,20 @@ public class DamageNumbers : MonoBehaviour
       float difference = lastHealth - enemyHp.currentHealth;
       lastHealth = enemyHp.currentHealth;
 
-      int amount = Mathf.RoundToInt(Mathf.Abs(difference));
-      if (amount == 0)
+      float absolute = Mathf.Abs(difference);
+      if (absolute < 0.05f)
       {
          return;
       }
+
+      string amount = absolute.ToString("0.#");
 
       Vector3 position = transform.position + Vector3.up * height;
       position += new Vector3(Random.Range(-randomOffset, randomOffset), 0, Random.Range(-randomOffset, randomOffset));
 
       if (difference > 0)
       {
-         FloatingDamageText.Spawn(position, amount.ToString(), damageColor, fontSize, lifeTime, riseSpeed);
+         FloatingDamageText.Spawn(position, amount, damageColor, fontSize, lifeTime, riseSpeed);
       }
       else
       {

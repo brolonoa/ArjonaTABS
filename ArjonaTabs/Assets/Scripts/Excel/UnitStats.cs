@@ -6,15 +6,17 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private string unitType;
 
     [Header("Unit Parameters from Google Sheets")]
-    public int health;
-    public int damage;
+    public float health;
+    public float damage;
     public float speed;
     public float attackCooldown;
     public float range;
     public int costCurrency;
     public float heal;
+    public float defense;
+    public float projectileSpeed;
 
-    public bool IsHealer => damage <= 0;
+    public bool IsHealer => heal > 0;
 
     private void Start()
     {
@@ -58,5 +60,7 @@ public class UnitStats : MonoBehaviour
         range = data.range;
         costCurrency = data.costCurrency;
         heal = data.heal;
+        defense = data.defense;
+        projectileSpeed = data.projectileSpeed;
     }
 }

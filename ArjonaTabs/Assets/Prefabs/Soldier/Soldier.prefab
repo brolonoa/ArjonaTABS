@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeamMember
   movementTransform: {fileID: 5357009227245296468}
+  stats: {fileID: 0}
   team: 1
 --- !u!114 &6741619787656146097
 MonoBehaviour:
@@ -67,6 +68,9 @@ MonoBehaviour:
   attackCooldown: 0
   range: 0
   costCurrency: 0
+  heal: 0
+  defense: 0
+  projectileSpeed: 0
 --- !u!1 &4246584576683681176
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +354,7 @@ GameObject:
   - component: {fileID: 4428604914199759958}
   - component: {fileID: 2418248443764378076}
   - component: {fileID: 7095366868275407212}
+  - component: {fileID: 5150334135741853998}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -409,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   rotationSpeed: 360
+  healerFollowDistance: 7
 --- !u!114 &2214675475949999430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +515,21 @@ MonoBehaviour:
   lifeTime: 0.9
   riseSpeed: 1.2
   randomOffset: 0.3
+--- !u!114 &5150334135741853998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102933344042142264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0a21f1669136a40babecd9a8993abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitAnimation
+  anim: {fileID: 2991438733609458404}
+  agent: {fileID: 3356758190293481258}
+  smoothing: 10
 --- !u!1001 &8712543350754010997
 PrefabInstance:
   m_ObjectHideFlags: 0

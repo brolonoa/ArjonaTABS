@@ -17,7 +17,9 @@ public class EnemyHp : MonoBehaviour
 
    public void TakeDamage(float damage)
    {
-      currentHealth -= damage;
+      float defense = sm != null && sm.stats != null ? sm.stats.defense : 0f;
+      float reduction = Mathf.Clamp01(defense / 100f);
+      currentHealth -= damage * (1f - reduction);
       if (currentHealth <= 0)
       {
          Destroy(transform.parent.gameObject);

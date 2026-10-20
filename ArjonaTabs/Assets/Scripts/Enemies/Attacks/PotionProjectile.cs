@@ -9,6 +9,7 @@ public class PotionProjectile : MonoBehaviour
 
     private Rigidbody rb;
     private TeamMember owner;
+    private TeamMember.Team ownerTeam;
     private bool hasExploded;
 
     private void Awake()
@@ -19,6 +20,7 @@ public class PotionProjectile : MonoBehaviour
     public void Launch(Vector3 targetPosition, TeamMember thrower, float flightTime)
     {
         owner = thrower;
+        ownerTeam = thrower.CurrentTeam;
 
         Vector3 displacement = targetPosition - transform.position;
 
@@ -42,45 +44,61 @@ public class PotionProjectile : MonoBehaviour
         
         if (target != null)
         {
-            if (target.CurrentTeam == owner.CurrentTeam)
+            if (target.CurrentTeam == ownerTeam)
                 return;
         }
         else
         {
-            
+
             if (!collision.gameObject.CompareTag("Ground"))
                 return;
         }
 
-        Explode();
+        Explode(target);
     }
 
-    private void Explode()
+    // Single target: the enemy hit directly, or else the closest enemy to the impact inside explosionRadius
+    private void Explode(TeamMember directHit)
     {
         hasExploded = true;
 
+        TeamMember victim = directHit != null ? directHit : FindClosestEnemy();
+
+        if (victim != null)
+        {
+            victim.TakeDamage(damage);
+        }
+
+        Destroy(gameObject);
+    }
+
+    private TeamMember FindClosestEnemy()
+    {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius, targetLayers);
 
-        HashSet<TeamMember> hitTargets = new HashSet<TeamMember>();
+        TeamMember closest = null;
+        float closestDistance = float.MaxValue;
 
         foreach (Collider hitCollider in hitColliders)
         {
-            TeamMember target =
-                hitCollider.GetComponentInParent<TeamMember>();
+            TeamMember target = hitCollider.GetComponentInParent<TeamMember>();
 
             if (target == null || target == owner)
                 continue;
 
-            if (target.CurrentTeam == owner.CurrentTeam)
+            if (target.CurrentTeam == ownerTeam)
                 continue;
 
-            if (!hitTargets.Add(target))
-                continue;
+            float distance = (target.Position - transform.position).sqrMagnitude;
 
-            target.TakeDamage(damage);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = target;
+            }
         }
 
-        Destroy(gameObject);
+        return closest;
     }
 
     private void OnDrawGizmos()

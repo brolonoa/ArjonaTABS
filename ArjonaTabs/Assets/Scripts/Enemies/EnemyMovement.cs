@@ -31,8 +31,12 @@ public class EnemyMovement : MonoBehaviour
    {
       if (sm.stats.IsHealer)
       {
-         
+         // Heal first; when no ally needs healing, fight like any other unit
          currentTarget = BattleManager.Instance.FindMostInjuredAlly(sm.teamMember);
+         if (currentTarget == null)
+         {
+            currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
+         }
          if (currentTarget == null)
          {
             currentTarget = BattleManager.Instance.FindClosestAllyPrioritizingNonHealers(sm.teamMember);
@@ -44,8 +48,6 @@ public class EnemyMovement : MonoBehaviour
          currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
          sm.currentTarget = currentTarget;
       }
-      
-      
    }
    private void InicialiceStats()
    {
@@ -60,16 +62,14 @@ public class EnemyMovement : MonoBehaviour
 
       float distance = (currentTarget.Position - transform.position).sqrMagnitude;
 
-      if (sm.stats.IsHealer)
-      {
-         if (distance <= healerFollowDistance * healerFollowDistance)
-         {
-            _agent.isStopped = true;
-            return;
-         }
+      // Every unit walks until its target is inside its range and then stays there.
+      // Healers following a healthy ally keep healerFollowDistance instead
+      bool justFollowing = sm.stats.IsHealer && !sm.teamMember.IsEnemy(currentTarget) && !currentTarget.NeedsHealing;
+      float stopDistance = justFollowing ? healerFollowDistance : sm.stats.range * 0.9f;
 
-         _agent.isStopped = false;
-         _agent.SetDestination(currentTarget.Position);
+      if (distance <= stopDistance * stopDistance)
+      {
+         _agent.isStopped = true;
       }
       else
       {

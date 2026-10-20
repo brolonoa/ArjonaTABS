@@ -35,8 +35,16 @@
          if (col != null)
              aimPoint = col.bounds.center;
 
+         // With a projectileSpeed in the Excel the flight time depends on the distance; otherwise the fixed flightTime is used
+         float time = flightTime;
+         if (sm.stats.projectileSpeed > 0)
+         {
+            float distance = Vector3.Distance(throwPoint.position, aimPoint);
+            time = Mathf.Max(0.2f, distance / sm.stats.projectileSpeed);
+         }
+
          PotionProjectile potion = Instantiate(potionPrefab, throwPoint.position, throwPoint.rotation);
-         potion.Launch(aimPoint, teamMember, flightTime);
+         potion.Launch(aimPoint, teamMember, time);
      }
     
         

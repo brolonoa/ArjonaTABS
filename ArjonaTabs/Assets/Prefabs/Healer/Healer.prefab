@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d98589b1c97894fa4016f44a1dbc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  enemyHp: {fileID: 0}
-  controller: {fileID: 0}
+  enemyHp: {fileID: 3556379269827497672}
+  controller: {fileID: 1115960169195538461}
   fill: {fileID: 3104258621160811033}
   fillImage: {fileID: 8292079161815737673}
   fullColor: {r: 0.3, g: 0.85, b: 0.25, a: 1}
@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4972139000554785239}
   - component: {fileID: 6780144487879704853}
   - component: {fileID: 8373715244272943341}
+  - component: {fileID: 8023997054386855791}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72742a5f19be0054980def8d9e9e1998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  enemyHp: {fileID: 0}
+  enemyHp: {fileID: 3556379269827497672}
   flashMaterial: {fileID: 2100000, guid: 67cba3ee7e736e243b3f2f5d4bb6e80f, type: 2}
   flashDuration: 0.2
 --- !u!136 &6780144487879704853
@@ -316,6 +317,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8023997054386855791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5942555024987319028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0a21f1669136a40babecd9a8993abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitAnimation
+  anim: {fileID: 8120533131753348659}
+  agent: {fileID: 3277758392968573941}
+  smoothing: 10
 --- !u!1 &6402933460801657232
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +461,8 @@ MonoBehaviour:
   range: 0
   costCurrency: 0
   heal: 0
+  defense: 0
+  projectileSpeed: 0
 --- !u!114 &3150384454169365146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,6 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealBeam
   beamMaterial: {fileID: 2100000, guid: 33782fd5883713145ad6cb6c06f74cef, type: 2}
   beamColor: {r: 0.3, g: 1, b: 0.35, a: 0.6313726}
+  damageColor: {r: 1, g: 0.25, b: 0.2, a: 0.9}
   startWidth: 0.18
   endWidth: 0.08
   duration: 0.4

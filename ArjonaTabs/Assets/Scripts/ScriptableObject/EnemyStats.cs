@@ -11,14 +11,14 @@ public class EnemyStats : ScriptableObject
     [SerializeField] private string unitType;
 
     [Header("Unit Parameters from Google Sheets")]
-    public int health;
-    public int damage;
+    public float health;
+    public float damage;
     public float speed;
     public float attackCooldown;
     public float range;
     public int costCurrency;
 
-    public bool IsHealer => damage < 0;
+    public bool IsHealer => false;
 
     private void Start()
     {

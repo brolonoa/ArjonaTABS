@@ -6,6 +6,7 @@ public class HealBeam : MonoBehaviour
 {
     [SerializeField] private Material beamMaterial;
     [SerializeField] private Color beamColor = new Color(0.3f, 1f, 0.35f, 0.9f);
+    [SerializeField] private Color damageColor = new Color(1f, 0.25f, 0.2f, 0.9f);
     [SerializeField] private float startWidth = 0.18f;
     [SerializeField] private float endWidth = 0.08f;
     [SerializeField] private float duration = 0.4f;
@@ -52,9 +53,10 @@ public class HealBeam : MonoBehaviour
             return;
         }
 
+        bool isEnemy = controller.teamMember != null && controller.teamMember.IsEnemy(target);
         bool neededHealing = target == lastTarget ? lastTargetHealth < 1f : target.NeedsHealing;
 
-        if (!neededHealing)
+        if (!isEnemy && !neededHealing)
         {
             return;
         }
@@ -64,10 +66,10 @@ public class HealBeam : MonoBehaviour
             StopCoroutine(beamCoroutine);
         }
 
-        beamCoroutine = StartCoroutine(ShowBeam(target));
+        beamCoroutine = StartCoroutine(ShowBeam(target, isEnemy ? damageColor : beamColor));
     }
 
-    private IEnumerator ShowBeam(TeamMember target)
+    private IEnumerator ShowBeam(TeamMember target, Color baseColor)
     {
         line.enabled = true;
 
@@ -84,12 +86,12 @@ public class HealBeam : MonoBehaviour
             line.SetPosition(0, from);
             line.SetPosition(1, to);
 
-            Color color = beamColor;
+            Color color = baseColor;
             color.a *= 1 - t / duration;
             line.startColor = color;
             line.endColor = color;
 
-            Debug.DrawLine(from, to, Color.green);
+            Debug.DrawLine(from, to, baseColor);
             yield return null;
         }
 

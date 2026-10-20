@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4791795226277142874}
   - component: {fileID: 1657066184443201965}
   - component: {fileID: 1291357866284256551}
+  - component: {fileID: 5848673203219078563}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -76,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   rotationSpeed: 360
+  healerFollowDistance: 7
 --- !u!114 &5925213444960709927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +178,21 @@ MonoBehaviour:
   lifeTime: 0.9
   riseSpeed: 1.2
   randomOffset: 0.3
+--- !u!114 &5848673203219078563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799916284388551076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0a21f1669136a40babecd9a8993abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitAnimation
+  anim: {fileID: 4315919448995796442}
+  agent: {fileID: 2584819888973460648}
+  smoothing: 10
 --- !u!1 &4546825093639665207
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +357,9 @@ MonoBehaviour:
   attackCooldown: 0
   range: 0
   costCurrency: 0
+  heal: 0
+  defense: 0
+  projectileSpeed: 0
 --- !u!114 &4446175294916261194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeamMember
   movementTransform: {fileID: 934851270086968392}
+  stats: {fileID: 0}
   team: 0
 --- !u!1 &7551149373635669611
 GameObject:
