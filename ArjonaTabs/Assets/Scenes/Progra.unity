@@ -1616,7 +1616,7 @@ PrefabInstance:
       objectReference: {fileID: 54888523}
     - target: {fileID: 8084410621290317410, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
       propertyPath: m_Name
-      value: Healer
+      value: Vampire
       objectReference: {fileID: 0}
     - target: {fileID: 8084410621290317410, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
       propertyPath: m_IsActive
@@ -1679,7 +1679,7 @@ GameObject:
   - component: {fileID: 492828877}
   - component: {fileID: 492828876}
   m_Layer: 0
-  m_Name: Healer
+  m_Name: Vampiro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1724,7 +1724,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Healer
+  m_text: 'Vampiro
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2709,7 +2711,7 @@ GameObject:
   - component: {fileID: 854343145}
   - component: {fileID: 854343144}
   m_Layer: 0
-  m_Name: ButtonHealer
+  m_Name: ButtonVampiro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2838,7 +2840,7 @@ MonoBehaviour:
   redPrefab: {fileID: 8492147168603707028, guid: a4ee456a30d005f42acd79cae3c26fdb, type: 3}
   placementSystemBlue: {fileID: 454392703}
   placementSystemRed: {fileID: 366899675}
-  unitType: Healer
+  unitType: Vampire
   costText: {fileID: 1866849826}
 --- !u!222 &854343147
 CanvasRenderer:
@@ -5199,6 +5201,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1152506253}
     m_Modifications:
+    - target: {fileID: 2337895907987171576, guid: 8ac0739fc454f4b4db201de09c12d29f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3257147628359795702, guid: 8ac0739fc454f4b4db201de09c12d29f, type: 3}
       propertyPath: m_Name
       value: Victory

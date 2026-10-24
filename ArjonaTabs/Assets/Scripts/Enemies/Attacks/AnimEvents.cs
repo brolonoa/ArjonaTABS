@@ -4,7 +4,7 @@ public class AnimEvents : MonoBehaviour
 {
    [SerializeField] private MeleeAttack _meleeAttack;
    [SerializeField] private RangeAttack _rangeAttack;
-   [SerializeField] private HealAttack _heal;
+   [SerializeField] private VampireAttack _vampireAttack;
    public void EnableHurtBox()
    {
       _meleeAttack.EnableDamage();
@@ -19,8 +19,8 @@ public class AnimEvents : MonoBehaviour
       _rangeAttack.InstantiateProjectile();
    }
 
-   public void Heal()
+   public void VampireHit()
    {
-      _heal.Heal();
+      _vampireAttack.Hit();
    }
 }

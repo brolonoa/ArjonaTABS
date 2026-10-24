@@ -30,6 +30,15 @@ public class EnemyController : MonoBehaviour
       isSubscribed = false;
    }
 
+   private void Awake()
+   {
+      // If the reference is lost in a prefab variant, use the TeamMember of this unit
+      if (teamMember == null)
+      {
+         teamMember = GetComponentInParent<TeamMember>();
+      }
+   }
+
    private void Start()
    {
       _enemyMovement = GetComponent<EnemyMovement>();
@@ -66,8 +75,6 @@ public class EnemyController : MonoBehaviour
          
          if (_enemyMovement.IsInAttackRange())
          {
-            if (stats.IsHealer && !teamMember.IsEnemy(currentTarget) && !currentTarget.NeedsHealing)
-               return;
             _attack.StartAttack();
             StartCoroutine(AttackCooldown());
             isAttackReady=false;

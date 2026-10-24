@@ -5,12 +5,17 @@ public class BattleResult : MonoBehaviour
 {
    [SerializeField] private GameObject blueVictoryPanel;
    [SerializeField] private GameObject redVictoryPanel;
+   [SerializeField] private GameObject drawPanel;
    [SerializeField] private float checkTime = 0.25f;
 
    private void Start()
    {
       blueVictoryPanel.SetActive(false);
       redVictoryPanel.SetActive(false);
+      if (drawPanel != null)
+      {
+         drawPanel.SetActive(false);
+      }
       GameManager.Instance.OnCombatStart += OnCombatStart;
    }
 
@@ -63,6 +68,10 @@ public class BattleResult : MonoBehaviour
          else if (redAlive > 0)
          {
             redVictoryPanel.SetActive(true);
+         }
+         else if (drawPanel != null)
+         {
+            drawPanel.SetActive(true);
          }
 
          yield break;

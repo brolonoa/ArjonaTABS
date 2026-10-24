@@ -1,29 +1,28 @@
 using UnityEngine;
 
-public class HealAttack : EnemyAttack
+// Hits its enemy target from range and steals life for itself (the "lifeSteal" stat)
+public class VampireAttack : EnemyAttack
 {
     public override void StartAttack()
     {
         sm.anim.SetTrigger("attack");
     }
 
-    public void Heal()
+    public void Hit()
     {
         TeamMember target = sm.currentTarget;
 
-        if (target == null)
+        if (target == null || !sm.teamMember.IsEnemy(target))
             return;
 
-        if (sm.teamMember.IsEnemy(target))
-        {
-            target.TakeDamage(sm.stats.damage);
-            return;
-        }
+        float targetBefore = target.HealthPercentage;
+        float selfBefore = sm.teamMember.HealthPercentage;
 
-        if (!target.NeedsHealing)
-            return;
+        target.TakeDamage(sm.stats.damage);
+        sm.teamMember.Heal(sm.stats.lifeSteal);
 
-        target.Heal(sm.stats.heal);
+        Debug.Log($"[Vampiro] {sm.teamMember.name} -> {target.name} | daño {sm.stats.damage} | vida objetivo {targetBefore:P0} -> {target.HealthPercentage:P0} | vida propia {selfBefore:P0} -> {sm.teamMember.HealthPercentage:P0}");
+        
     }
 
 }

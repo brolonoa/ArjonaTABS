@@ -10,8 +10,6 @@ public class DamageFlash : MonoBehaviour
    private Renderer[] renderers;
    private Material[][] originalMaterials;
    private Material[][] flashMaterials;
-   private float lastHealth;
-   private bool initialized;
    private Coroutine flashCoroutine;
 
    private void Start()
@@ -31,21 +29,35 @@ public class DamageFlash : MonoBehaviour
       }
    }
 
-   private void Update()
+   private void OnEnable()
    {
-      if (!initialized)
+      if (enemyHp == null)
       {
-         lastHealth = enemyHp.currentHealth;
-         initialized = true;
+         enemyHp = GetComponent<EnemyHp>();
+      }
+
+      if (enemyHp != null)
+      {
+         enemyHp.OnDamaged += Flash;
+      }
+   }
+
+   private void OnDisable()
+   {
+      if (enemyHp != null)
+      {
+         enemyHp.OnDamaged -= Flash;
+      }
+   }
+
+   private void Flash(float damage)
+   {
+      if (renderers == null)
+      {
          return;
       }
 
-      if (enemyHp.currentHealth < lastHealth)
-      {
-         Flash();
-      }
-
-      lastHealth = enemyHp.currentHealth;
+      Flash();
    }
 
    private void Flash()

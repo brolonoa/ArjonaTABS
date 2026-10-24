@@ -10,53 +10,50 @@ public class DamageNumbers : MonoBehaviour
    [SerializeField] private float lifeTime = 0.9f;
    [SerializeField] private float riseSpeed = 1.2f;
    [SerializeField] private float randomOffset = 0.3f;
+   [SerializeField] private float healExtraHeight = 0.5f;
 
-   private float lastHealth;
-   private bool initialized;
-
-   private void Update()
+   private void OnEnable()
    {
-      if (!initialized)
+      if (enemyHp == null)
       {
-         lastHealth = enemyHp.currentHealth;
-         initialized = true;
-         return;
+         enemyHp = GetComponent<EnemyHp>();
       }
 
-      CheckHealth();
-   }
-
-   private void OnDestroy()
-   {
-      if (initialized && gameObject.scene.isLoaded)
+      if (enemyHp != null)
       {
-         CheckHealth();
+         enemyHp.OnDamaged += ShowDamage;
+         enemyHp.OnHealed += ShowHeal;
       }
    }
 
-   private void CheckHealth()
+   private void OnDisable()
    {
-      float difference = lastHealth - enemyHp.currentHealth;
-      lastHealth = enemyHp.currentHealth;
+      if (enemyHp != null)
+      {
+         enemyHp.OnDamaged -= ShowDamage;
+         enemyHp.OnHealed -= ShowHeal;
+      }
+   }
 
-      float absolute = Mathf.Abs(difference);
-      if (absolute < 0.05f)
+   private void ShowDamage(float amount)
+   {
+      Spawn(amount.ToString("0.#"), damageColor, 0f);
+   }
+
+   private void ShowHeal(float amount)
+   {
+      Spawn("+" + amount.ToString("0.#"), healColor, healExtraHeight);
+   }
+
+   private void Spawn(string text, Color color, float extraHeight)
+   {
+      if (!gameObject.scene.isLoaded)
       {
          return;
       }
 
-      string amount = absolute.ToString("0.#");
-
-      Vector3 position = transform.position + Vector3.up * height;
+      Vector3 position = transform.position + Vector3.up * (height + extraHeight);
       position += new Vector3(Random.Range(-randomOffset, randomOffset), 0, Random.Range(-randomOffset, randomOffset));
-
-      if (difference > 0)
-      {
-         FloatingDamageText.Spawn(position, amount, damageColor, fontSize, lifeTime, riseSpeed);
-      }
-      else
-      {
-         FloatingDamageText.Spawn(position, "+" + amount, healColor, fontSize, lifeTime, riseSpeed);
-      }
+      FloatingDamageText.Spawn(position, text, color, fontSize, lifeTime, riseSpeed);
    }
 }

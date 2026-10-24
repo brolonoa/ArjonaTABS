@@ -24,11 +24,6 @@ public class TeamMember : MonoBehaviour
         stats = GetComponent<UnitStats>();
     }
 
-    public bool IsHealer()
-    {
-        return stats.IsHealer;
-    }
-
     public void SetTeam(Team newTeam)
     {
         team = newTeam;
@@ -70,7 +65,6 @@ public class TeamMember : MonoBehaviour
     }
     public float HealthPercentage => hp != null ? hp.HealthPercentage : 1f;
 
-    public bool NeedsHealing => hp != null && hp.HealthPercentage < 1f;
 }
 
     

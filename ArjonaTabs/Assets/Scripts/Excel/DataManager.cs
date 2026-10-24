@@ -25,7 +25,7 @@ public class ExcelManager : MonoBehaviour
         public float attackCooldown;
         public float range;
         public int costCurrency;
-        public float heal;
+        public float lifeSteal;
         public float defense;
         public float projectileSpeed;
     }
@@ -97,16 +97,10 @@ public class ExcelManager : MonoBehaviour
         }
 
         // Columns are found by their header name, so adding or moving columns in the sheet doesn't break anything
-        // The header is the row whose first cell is "class", so title rows above it are ignored
-        int headerRow = 0;
-        for (int i = 0; i < lines.Length; i++)
-        {
-            if (SplitCsvLine(lines[i])[0].Trim().ToLower() == "class")
-            {
-                headerRow = i;
-                break;
-            }
-        }
+        // Only the "INGAME STATS" table is read: its header is the first row starting with "class" after that title
+        // (or the first "class" row if there is no title), and it ends at the first row with an empty first cell.
+        // Other tables in the sheet (like "EXCEL STATS") are ignored
+        int headerRow = FindHeaderRow(lines);
 
         List<string> header = SplitCsvLine(lines[headerRow]);
         Dictionary<string, int> columns = new Dictionary<string, int>();
@@ -134,7 +128,7 @@ public class ExcelManager : MonoBehaviour
 
             if (string.IsNullOrEmpty(unitName))
             {
-                continue;
+                break;
             }
 
             UnitData data = new UnitData
@@ -145,14 +139,37 @@ public class ExcelManager : MonoBehaviour
                 attackCooldown = GetFloat(fields, columns, "attackcooldown"),
                 range = GetFloat(fields, columns, "range"),
                 costCurrency = Mathf.RoundToInt(GetFloat(fields, columns, "costcurrency")),
-                heal = GetFloat(fields, columns, "heal"),
+                lifeSteal = GetFloat(fields, columns, "lifesteal", "heal"),
                 defense = GetFloat(fields, columns, "defense"),
                 projectileSpeed = GetFloat(fields, columns, "projectilespeed", "proyectilespeed"),
             };
 
             unitsData[unitName] = data;
-            Debug.Log($"[Success] {unitName} loaded -> Health: {data.health}, Damage: {data.damage}, Speed: {data.speed}, Cooldown: {data.attackCooldown}, Range: {data.range}, Cost: {data.costCurrency}, Heal: {data.heal}, Defense: {data.defense}, Projectile speed: {data.projectileSpeed}");
+            Debug.Log($"[Success] {unitName} loaded -> Health: {data.health}, Damage: {data.damage}, Speed: {data.speed}, Cooldown: {data.attackCooldown}, Range: {data.range}, Cost: {data.costCurrency}, Life steal: {data.lifeSteal}, Defense: {data.defense}, Projectile speed: {data.projectileSpeed}");
         }
+    }
+
+    int FindHeaderRow(string[] lines)
+    {
+        int titleRow = -1;
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if (lines[i].ToLower().Contains("ingame stats"))
+            {
+                titleRow = i;
+                break;
+            }
+        }
+
+        for (int i = titleRow + 1; i < lines.Length; i++)
+        {
+            if (SplitCsvLine(lines[i])[0].Trim().ToLower() == "class")
+            {
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     // Splits a CSV line keeping quoted values like "1,5" together

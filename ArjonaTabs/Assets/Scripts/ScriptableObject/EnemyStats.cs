@@ -7,7 +7,7 @@ public class EnemyStats : ScriptableObject
     public GameObject BluePrefab { get; private set; }
     public GameObject RedPrefab { get; private set; }
     
-    [Header("Row name in Google Sheets (soldier, tank, ranged, healer)")]
+    [Header("Row name in Google Sheets (soldier, tank, ranged, vampire)")]
     [SerializeField] private string unitType;
 
     [Header("Unit Parameters from Google Sheets")]
@@ -18,7 +18,6 @@ public class EnemyStats : ScriptableObject
     public float range;
     public int costCurrency;
 
-    public bool IsHealer => false;
 
     private void Start()
     {

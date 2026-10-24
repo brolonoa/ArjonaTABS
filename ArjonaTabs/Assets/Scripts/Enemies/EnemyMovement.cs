@@ -10,7 +10,6 @@ public class EnemyMovement : MonoBehaviour
    
    private bool combatStarted = false;
    [SerializeField] private float rotationSpeed = 360f;
-   [SerializeField] private float healerFollowDistance = 7f;
 
    private void Start()
    {
@@ -29,25 +28,13 @@ public class EnemyMovement : MonoBehaviour
 
    private void SearchNextTarget()
    {
-      if (sm.stats.IsHealer)
+      if (sm.teamMember == null || BattleManager.Instance == null)
       {
-         // Heal first; when no ally needs healing, fight like any other unit
-         currentTarget = BattleManager.Instance.FindMostInjuredAlly(sm.teamMember);
-         if (currentTarget == null)
-         {
-            currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
-         }
-         if (currentTarget == null)
-         {
-            currentTarget = BattleManager.Instance.FindClosestAllyPrioritizingNonHealers(sm.teamMember);
-         }
-         sm.currentTarget = currentTarget;
+         return;
       }
-      else
-      {
-         currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
-         sm.currentTarget = currentTarget;
-      }
+
+      currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
+      sm.currentTarget = currentTarget;
    }
    private void InicialiceStats()
    {
@@ -62,10 +49,8 @@ public class EnemyMovement : MonoBehaviour
 
       float distance = (currentTarget.Position - transform.position).sqrMagnitude;
 
-      // Every unit walks until its target is inside its range and then stays there.
-      // Healers following a healthy ally keep healerFollowDistance instead
-      bool justFollowing = sm.stats.IsHealer && !sm.teamMember.IsEnemy(currentTarget) && !currentTarget.NeedsHealing;
-      float stopDistance = justFollowing ? healerFollowDistance : sm.stats.range * 0.9f;
+      // Every unit walks until its target is inside its range and then stays there
+      float stopDistance = sm.stats.range * 0.9f;
 
       if (distance <= stopDistance * stopDistance)
       {

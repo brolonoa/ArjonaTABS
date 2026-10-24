@@ -8,14 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1115960169195538461, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
-      propertyPath: teamMember
-      value: 
-      objectReference: {fileID: 364418906064598756}
-    - target: {fileID: 1115960169195538461, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
-      propertyPath: currentTarget
-      value: 
-      objectReference: {fileID: 364418906064598756}
     - target: {fileID: 1334301666090244145, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -52,9 +44,13 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1bfa61cfb43b0cb4996c8537b4174ff7, type: 2}
+    - target: {fileID: 7686223502163931679, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
+      propertyPath: team
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8084410621290317410, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
       propertyPath: m_Name
-      value: HealerRed
+      value: VampireRed
       objectReference: {fileID: 0}
     - target: {fileID: 9129037264275397561, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
       propertyPath: m_LocalPosition.x
@@ -96,37 +92,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3150384454169365146, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
-    m_RemovedGameObjects:
-    - {fileID: 8011827376733005781, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8084410621290317410, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 364418906064598756}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
---- !u!4 &1688803889049258183 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1334301666090244145, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
-  m_PrefabInstance: {fileID: 426630834298097910}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8492147168603707028 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8084410621290317410, guid: 2aff6e71408de4d48a21aa9203cec716, type: 3}
-  m_PrefabInstance: {fileID: 426630834298097910}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &364418906064598756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492147168603707028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee3d251bb230a4247a5a7783acac55e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TeamMember
-  movementTransform: {fileID: 1688803889049258183}
-  team: 0

@@ -2,11 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class HealBeam : MonoBehaviour
+public class VampireBeam : MonoBehaviour
 {
     [SerializeField] private Material beamMaterial;
-    [SerializeField] private Color beamColor = new Color(0.3f, 1f, 0.35f, 0.9f);
-    [SerializeField] private Color damageColor = new Color(1f, 0.25f, 0.2f, 0.9f);
+    [SerializeField] private Color beamColor = new Color(1f, 0.25f, 0.2f, 0.9f);
     [SerializeField] private float startWidth = 0.18f;
     [SerializeField] private float endWidth = 0.08f;
     [SerializeField] private float duration = 0.4f;
@@ -15,15 +14,13 @@ public class HealBeam : MonoBehaviour
 
     private EnemyController controller;
     private LineRenderer line;
-    private TeamMember lastTarget;
-    private float lastTargetHealth = 1f;
     private Coroutine beamCoroutine;
 
     private void Awake()
     {
         controller = GetComponentInParent<EnemyController>();
 
-        GameObject beam = new GameObject("HealBeam");
+        GameObject beam = new GameObject("VampireBeam");
         beam.transform.SetParent(transform, false);
 
         line = beam.AddComponent<LineRenderer>();
@@ -38,25 +35,12 @@ public class HealBeam : MonoBehaviour
         line.enabled = false;
     }
 
-    private void LateUpdate()
-    {
-        lastTarget = controller != null ? controller.currentTarget : null;
-        lastTargetHealth = lastTarget != null ? lastTarget.HealthPercentage : 1f;
-    }
-
-    public void Heal()
+    // Called by the animation event of the vampire attack, at the same time as VampireAttack.Hit
+    public void VampireHit()
     {
         TeamMember target = controller != null ? controller.currentTarget : null;
 
-        if (target == null)
-        {
-            return;
-        }
-
-        bool isEnemy = controller.teamMember != null && controller.teamMember.IsEnemy(target);
-        bool neededHealing = target == lastTarget ? lastTargetHealth < 1f : target.NeedsHealing;
-
-        if (!isEnemy && !neededHealing)
+        if (target == null || controller.teamMember == null || !controller.teamMember.IsEnemy(target))
         {
             return;
         }
@@ -66,10 +50,10 @@ public class HealBeam : MonoBehaviour
             StopCoroutine(beamCoroutine);
         }
 
-        beamCoroutine = StartCoroutine(ShowBeam(target, isEnemy ? damageColor : beamColor));
+        beamCoroutine = StartCoroutine(ShowBeam(target));
     }
 
-    private IEnumerator ShowBeam(TeamMember target, Color baseColor)
+    private IEnumerator ShowBeam(TeamMember target)
     {
         line.enabled = true;
 
@@ -86,12 +70,12 @@ public class HealBeam : MonoBehaviour
             line.SetPosition(0, from);
             line.SetPosition(1, to);
 
-            Color color = baseColor;
+            Color color = beamColor;
             color.a *= 1 - t / duration;
             line.startColor = color;
             line.endColor = color;
 
-            Debug.DrawLine(from, to, baseColor);
+            Debug.DrawLine(from, to, beamColor);
             yield return null;
         }
 

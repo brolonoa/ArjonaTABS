@@ -80878,7 +80878,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.9
-    functionName: Heal
+    functionName: VampireHit
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -39,38 +39,51 @@ public class MeleeAttack :EnemyAttack
         }
     }
     
+    // Single target: each swing damages only one enemy. The current target is preferred;
+    // if it isn't inside the hit box, the closest enemy inside it is hit instead
     private IEnumerator AttackRoutine()
     {
-        
-        while (isAttacking)
+        TeamMember self = GetComponentInParent<TeamMember>();
+
+        while (isAttacking && hitTargets.Count == 0)
         {
             Vector3 boxCenter = transform.position + transform.forward;
 
             Collider[] hitColliders = Physics.OverlapBox(boxCenter, boxSize / 2f, transform.rotation
             );
 
+            TeamMember victim = null;
+            float closestDistance = float.MaxValue;
+
             foreach (Collider hitCollider in hitColliders)
             {
                 TeamMember target = hitCollider.GetComponentInParent<TeamMember>();
 
-                if (target == null)
+                if (target == null || target.CurrentTeam == self.CurrentTeam)
                 {
                     continue;
                 }
 
-                if (target.CurrentTeam == GetComponentInParent<TeamMember>().CurrentTeam)
+                if (target == sm.currentTarget)
                 {
-                    continue;
-                }
-                if (!hitTargets.Add(target))
-                {
-                    continue;
+                    victim = target;
+                    break;
                 }
 
-                target.TakeDamage(sm.stats.damage);
-               
+                float distance = (target.Position - transform.position).sqrMagnitude;
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    victim = target;
+                }
             }
-            
+
+            if (victim != null)
+            {
+                hitTargets.Add(victim);
+                victim.TakeDamage(sm.stats.damage);
+            }
+
             yield return null;
         }
     }

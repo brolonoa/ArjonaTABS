@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UnitStats : MonoBehaviour
 {
-    [Header("Row name in Google Sheets (soldier, tank, ranged, healer)")]
+    [Header("Row name in Google Sheets (soldier, tank, ranged, vampire)")]
     [SerializeField] private string unitType;
 
     [Header("Unit Parameters from Google Sheets")]
@@ -12,11 +12,10 @@ public class UnitStats : MonoBehaviour
     public float attackCooldown;
     public float range;
     public int costCurrency;
-    public float heal;
+    public float lifeSteal;
     public float defense;
     public float projectileSpeed;
 
-    public bool IsHealer => heal > 0;
 
     private void Start()
     {
@@ -59,7 +58,7 @@ public class UnitStats : MonoBehaviour
         attackCooldown = data.attackCooldown;
         range = data.range;
         costCurrency = data.costCurrency;
-        heal = data.heal;
+        lifeSteal = data.lifeSteal;
         defense = data.defense;
         projectileSpeed = data.projectileSpeed;
     }
