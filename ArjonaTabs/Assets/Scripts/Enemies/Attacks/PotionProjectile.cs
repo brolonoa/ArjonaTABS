@@ -5,6 +5,8 @@ public class PotionProjectile : MonoBehaviour
 {
     public float damage ;
     [SerializeField] private float explosionRadius = 3f;
+    [Tooltip("Seconds the poison takes to deal all the damage. 0 = all at once")]
+    [SerializeField] private float poisonDuration = 2f;
     [SerializeField] private LayerMask targetLayers = ~0;
 
     private Rigidbody rb;
@@ -21,6 +23,7 @@ public class PotionProjectile : MonoBehaviour
     {
         owner = thrower;
         ownerTeam = thrower.CurrentTeam;
+        IgnoreAllies();
 
         Vector3 displacement = targetPosition - transform.position;
 
@@ -32,6 +35,26 @@ public class PotionProjectile : MonoBehaviour
         Debug.Log($"Origen: {transform.position} | Destino: {targetPosition} | Velocidad: {launchVelocity}");
         Debug.DrawLine(transform.position, targetPosition, Color.red, 3f);
         
+    }
+
+    // The potion flies through allies, so a unit in front never stops it on its way to the enemy
+    private void IgnoreAllies()
+    {
+        Collider[] potionColliders = GetComponentsInChildren<Collider>();
+
+        foreach (TeamMember unit in FindObjectsByType<TeamMember>(FindObjectsSortMode.None))
+        {
+            if (unit.CurrentTeam != ownerTeam)
+                continue;
+
+            foreach (Collider allyCollider in unit.GetComponentsInChildren<Collider>())
+            {
+                foreach (Collider potionCollider in potionColliders)
+                {
+                    Physics.IgnoreCollision(potionCollider, allyCollider);
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -66,7 +89,7 @@ public class PotionProjectile : MonoBehaviour
 
         if (victim != null)
         {
-            victim.TakeDamage(damage);
+            PoisonEffect.Apply(victim, damage, poisonDuration);
         }
 
         Destroy(gameObject);

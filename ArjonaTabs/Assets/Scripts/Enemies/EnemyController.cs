@@ -75,6 +75,7 @@ public class EnemyController : MonoBehaviour
          
          if (_enemyMovement.IsInAttackRange())
          {
+            _enemyMovement.LockTarget();
             _attack.StartAttack();
             StartCoroutine(AttackCooldown());
             isAttackReady=false;

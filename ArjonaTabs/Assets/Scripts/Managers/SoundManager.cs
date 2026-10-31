@@ -44,9 +44,11 @@ public class SoundManager : MonoBehaviour
       }
    }
 
+   // Mutes the music and the combat start sound
    public void ToggleMusic()
    {
       musicMuted = !musicMuted;
+      sfxSource.mute = musicMuted;
    }
 
    private void Awake()

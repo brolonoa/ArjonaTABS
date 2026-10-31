@@ -5,8 +5,13 @@ public class EnemyHp : MonoBehaviour
 {
    private EnemyController sm;
    private float maxHealth;
+   private float baseMaxHealth;
    public float currentHealth;
    public float HealthPercentage => maxHealth > 0 ? (float)currentHealth / maxHealth : 0f;
+   public float MaxHealth => maxHealth;
+
+   [Tooltip("Healing above max health raises the max health, up to this multiple of the starting health")]
+   [SerializeField] private float maxHealthGrowthLimit = 2f;
 
    // Sent with the real amount of each hit and each heal, so damage numbers and flashes don't depend on frames
    public event Action<float> OnDamaged;
@@ -16,6 +21,7 @@ public class EnemyHp : MonoBehaviour
    {
       sm = GetComponent<EnemyController>();
       maxHealth = sm.stats.health;
+      baseMaxHealth = maxHealth;
       currentHealth = maxHealth;
    }
 
@@ -33,8 +39,19 @@ public class EnemyHp : MonoBehaviour
    }
    public void Heal(float amount)
    {
+      // A unit that already died this frame can't heal back
+      if (currentHealth <= 0)
+         return;
+
       float before = currentHealth;
-      currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+      currentHealth += amount;
+
+      // Life steal is never wasted: whatever goes above max health raises the max health, up to the limit
+      if (currentHealth > maxHealth)
+      {
+         maxHealth = Mathf.Min(currentHealth, baseMaxHealth * maxHealthGrowthLimit);
+         currentHealth = Mathf.Min(currentHealth, maxHealth);
+      }
       if (currentHealth > before)
       {
          OnHealed?.Invoke(currentHealth - before);

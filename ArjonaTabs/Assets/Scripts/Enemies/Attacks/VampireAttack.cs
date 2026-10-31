@@ -3,9 +3,12 @@ using UnityEngine;
 // Hits its enemy target from range and steals life for itself (the "lifeSteal" stat)
 public class VampireAttack : EnemyAttack
 {
+    // Life steal waits for the end of the frame, so hits that land at the same time are fair for both teams
+    private float pendingHeal;
+
     public override void StartAttack()
     {
-        sm.anim.SetTrigger("attack");
+        PlayAttackAnimation();
     }
 
     public void Hit()
@@ -15,14 +18,17 @@ public class VampireAttack : EnemyAttack
         if (target == null || !sm.teamMember.IsEnemy(target))
             return;
 
-        float targetBefore = target.HealthPercentage;
-        float selfBefore = sm.teamMember.HealthPercentage;
-
         target.TakeDamage(sm.stats.damage);
-        sm.teamMember.Heal(sm.stats.lifeSteal);
+        pendingHeal += sm.stats.lifeSteal;
+    }
 
-        Debug.Log($"[Vampiro] {sm.teamMember.name} -> {target.name} | daño {sm.stats.damage} | vida objetivo {targetBefore:P0} -> {target.HealthPercentage:P0} | vida propia {selfBefore:P0} -> {sm.teamMember.HealthPercentage:P0}");
-        
+    private void LateUpdate()
+    {
+        if (pendingHeal <= 0f)
+            return;
+
+        sm.teamMember.Heal(pendingHeal);
+        pendingHeal = 0f;
     }
 
 }

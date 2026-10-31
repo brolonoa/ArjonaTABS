@@ -12,14 +12,14 @@ public class MeleeAttack :EnemyAttack
 
     public override void StartAttack()
     {
-        
+        // A new swing restarts the animation, so the previous one ends here
         if (isAttacking)
         {
-            return;
+            DisableDamage();
         }
         boxSize = new Vector3(boxSize.x, boxSize.y, sm.stats.range);
         hitTargets.Clear();
-        sm.anim.SetTrigger("attack");
+        PlayAttackAnimation();
         isAttacking = true;
         
     }

@@ -20,7 +20,11 @@ public class HealthBar : MonoBehaviour
 
    private void Update()
    {
-      if (maxHealth <= 0)
+      if (enemyHp.MaxHealth > 0)
+      {
+         maxHealth = enemyHp.MaxHealth;
+      }
+      else if (maxHealth <= 0)
       {
          maxHealth = controller != null && controller.stats != null && controller.stats.health > 0 ? controller.stats.health : enemyHp.currentHealth;
       }

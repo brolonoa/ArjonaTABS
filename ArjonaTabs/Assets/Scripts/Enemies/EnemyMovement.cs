@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
    private TeamMember currentTarget;
    
    private bool combatStarted = false;
+   private bool targetLocked = false;
    [SerializeField] private float rotationSpeed = 360f;
 
    private void Start()
@@ -33,8 +34,25 @@ public class EnemyMovement : MonoBehaviour
          return;
       }
 
+      // Once the unit has started attacking its target, it keeps it until it dies,
+      // so damage isn't spread between several enemies. Before that, it goes for the closest one
+      if (targetLocked && currentTarget != null && sm.teamMember.IsEnemy(currentTarget))
+      {
+         sm.currentTarget = currentTarget;
+         return;
+      }
+
+      targetLocked = false;
       currentTarget = BattleManager.Instance.FindClosestEnemy(sm.teamMember);
       sm.currentTarget = currentTarget;
+   }
+
+   public void LockTarget()
+   {
+      if (currentTarget != null)
+      {
+         targetLocked = true;
+      }
    }
    private void InicialiceStats()
    {

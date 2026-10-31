@@ -19,7 +19,7 @@
      }
      public override void StartAttack()
      {
-         sm.anim.SetTrigger("attack");
+         PlayAttackAnimation();
          target = sm.currentTarget.gameObject.transform;
      }
 
