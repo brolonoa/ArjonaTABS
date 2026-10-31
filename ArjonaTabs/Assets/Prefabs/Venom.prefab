@@ -49,8 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6795b7490cf1ed45b265d5b8eb58c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PotionProjectile
-  damage: 8
+  damage: 6.8
   explosionRadius: 1.5
+  poisonDuration: 1
   targetLayers:
     serializedVersion: 2
     m_Bits: 4294967295

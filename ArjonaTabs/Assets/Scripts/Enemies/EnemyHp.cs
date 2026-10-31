@@ -32,7 +32,7 @@ public class EnemyHp : MonoBehaviour
       float finalDamage = damage * (1f - reduction);
       currentHealth -= finalDamage;
       OnDamaged?.Invoke(finalDamage);
-      if (currentHealth <= 0)
+      if (currentHealth <= 0.1)
       {
          Destroy(transform.parent.gameObject);
       }
